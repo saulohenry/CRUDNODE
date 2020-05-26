@@ -1,0 +1,71 @@
+<h1 class="h1">carro Inventory</h1>
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" class="carros">
+  <table mat-table fxFlex="100%" fxFlex.gt-sm="66%" [dataSource]="dataSource" class="mat-elevation-z1">
+    <ng-container matColumnDef="placa">
+      <th mat-header-cell *matHeaderCellDef> Placa</th>
+      <td mat-cell *matCellDef="let carro"> {{carro.placa}}</td>
+    </ng-container>
+    <ng-container matColumnDef="chassi">
+      <th mat-header-cell *matHeaderCellDef> Chassi</th>
+      <td mat-cell *matCellDef="let carro"> {{carro.chassi}}</td>
+    </ng-container>
+    <ng-container matColumnDef="renavan">
+      <th mat-header-cell *matHeaderCellDef> Renavan</th>
+      <td mat-cell *matCellDef="let carro"> {{carro.renavan}}</td>
+    </ng-container>
+    <ng-container matColumnDef="modelo">
+      <th mat-header-cell *matHeaderCellDef> Modelo</th>
+      <td mat-cell *matCellDef="let carro"> {{carro.modelo}}</td>
+    </ng-container>
+    <ng-container matColumnDef="marca">
+      <th mat-header-cell *matHeaderCellDef> Marca</th>
+      <td mat-cell *matCellDef="let carro"> {{carro.marca}}</td>
+    </ng-container>
+    <ng-container matColumnDef="ano">
+      <th mat-header-cell *matHeaderCellDef> Ano</th>
+      <td mat-cell *matCellDef="let carro"> {{carro.ano}}</td>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let carro">
+        <button mat-icon-button (click)="editcarro(carro)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let carro">
+        <button mat-icon-button (click)="deletecarro(carro)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-divider fxShow="false" fxShow.gt-sm [vertical]="true"></mat-divider>
+  <div>
+    <h2>Selected carro</h2>
+    <label>Name
+      <input type="text" [(ngModel)]="selectedcarro.name">
+    </label>
+    <label>SKU
+      <input type="text" [(ngModel)]="selectedcarro.sku">
+    </label>
+    <label>Description
+      <input type="text" [(ngModel)]="selectedcarro.description">
+    </label>
+    <label>Price
+      <input type="text" [(ngModel)]="selectedcarro.price">
+    </label>
+    <label>Stock Level
+      <input type="text" [(ngModel)]="selectedcarro.stock">
+    </label>
+    <button mat-flat-button color="primary" (click)="updatecarro()">{{(selectedcarro.id!==undefined)?'Update':'Create'}}</button>
+    <button mat-flat-button color="primary" (click)="clearcarro()">Clear</button>
+  </div>
+  <div class="loading" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
